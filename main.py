@@ -1,7 +1,6 @@
 import base64
 import io
 import os
-import PyPDF2
 import tempfile
 from PIL import Image
 from explorer.near import near_app
