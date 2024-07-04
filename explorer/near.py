@@ -369,41 +369,30 @@ def anomaly_detection(df):
 # Main app function
 def near_app():
 
-        st.markdown("### Select an Option")
-        option = st.radio(
-            "Select Choice",
-            ("Analysis", "Prediction"),
-            index=0, horizontal=True
-        )
-
-
-
-        if option == "Analysis":
         
-                st.title('🕵🏻 Real Time Insights and Whales/Sharks detection')
-                start_date = st.date_input("Start Date", value=pd.to_datetime('2023-01-01'))
-                end_date = st.date_input("End Date", value=pd.to_datetime('today'))
-                df = get_near_data(start_date, end_date)
+        st.title('🕵🏻 Real Time Insights and Whales/Sharks detection')
+        start_date = st.date_input("Start Date", value=pd.to_datetime('2023-01-01'))
+        end_date = st.date_input("End Date", value=pd.to_datetime('today'))
+        df = get_near_data(start_date, end_date)
 
-                if not df.empty:
-                    display_basic_data(df)
-                    statistical_analysis(df)
-                    distribution_fitting(df)
-                    value_at_risk(df)
-                    time_series_forecast(df)
-                    covariance_correlations(df)
-                    stock_statistics(df)
-                    beta_calculation(df)
-                    linear_regression(df)
-                    # Anomaly Detection
-                    anomaly_detection(df)
-                    # Generate summary and prediction
-                    #summary = summarize_findings(df)
-                    # prediction = generate_prediction(summary, st.secrets["API_KEY"])
-                    # st.subheader("Investment Outcome Prediction")
-                    # st.markdown(f"<div style='padding: 10px; border-radius: 10px; background-color: #f0f4c3; margin-bottom: 10px;'>🤖 <strong>Investment predictions response:</strong><br>{prediction}</div>", unsafe_allow_html=True)
-        elif option == "Prediction":
-            pred()
+        if not df.empty:
+            display_basic_data(df)
+            statistical_analysis(df)
+            distribution_fitting(df)
+            value_at_risk(df)
+            time_series_forecast(df)
+            covariance_correlations(df)
+            stock_statistics(df)
+            beta_calculation(df)
+            linear_regression(df)
+            # Anomaly Detection
+            anomaly_detection(df)
+            # Generate summary and prediction
+            #summary = summarize_findings(df)
+            # prediction = generate_prediction(summary, st.secrets["API_KEY"])
+            # st.subheader("Investment Outcome Prediction")
+            # st.markdown(f"<div style='padding: 10px; border-radius: 10px; background-color: #f0f4c3; margin-bottom: 10px;'>🤖 <strong>Investment predictions response:</strong><br>{prediction}</div>", unsafe_allow_html=True)
+       
 
 
 if __name__ == "__main__":
