@@ -95,9 +95,8 @@ def pred():
 
     st.write(""" ## Cryptocurrency Price Visualizer """)
 
-    crypto_name = st.selectbox("Select Cryptcurrency",("FXS"))
+    crypto_name = st.selectbox("Select Cryptcurrency",("FXS", "BTC"))
     currency_name = st.selectbox("Select Local Currency",("USD","EUR","INR","CAD","AUD","GBP"))
-    custom = st.text_input("Enter crypto-currency")
 
     if st.button("Visualize"):
 
