@@ -95,71 +95,74 @@ def pred():
 
     st.write(""" ## Cryptocurrency Price Visualizer """)
 
-    crypto_name = "FXS"
-    currency_name = "USD"
+    crypto_name = st.selectbox("Select Cryptcurrency",("FXS"))
+    currency_name = st.selectbox("Select Local Currency",("USD","EUR","INR","CAD","AUD","GBP"))
+    custom = st.text_input("Enter crypto-currency")
+
+    if st.button("Visualize"):
 
 
 
 
-    data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end)
-    # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
-    # st.write(pd.DataFrame(data))
-    st.write(f"Ploting the graph between {crypto_name} and {currency_name}.")
+        data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end)
+        # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
+        # st.write(pd.DataFrame(data))
+        st.write(f"Ploting the graph between {crypto_name} and {currency_name}.")
 
-    s = data['Close'].tail(1) 
-    st.write(f"The closing price for the {crypto_name} is {s} ")
+        s = data['Close'].tail(1) 
+        st.write(f"The closing price for the {crypto_name} is {s} ")
 
-    st.markdown("##")
-    data = data.reset_index()
-    data['Date'] = pd.to_datetime(data.Date, errors='coerce')
-    st.altair_chart(
-    alt.Chart(data).mark_line(color='blue').encode(
-        y=alt.Y('Close:N', sort='descending'),
-        x=alt.X('Date:T', sort='ascending'),
-    ).properties(
-    width=800,
-    height=300
-    ),  use_container_width=True
-    )
+        st.markdown("##")
+        data = data.reset_index()
+        data['Date'] = pd.to_datetime(data.Date, errors='coerce')
+        st.altair_chart(
+        alt.Chart(data).mark_line(color='blue').encode(
+            y=alt.Y('Close:N', sort='descending'),
+            x=alt.X('Date:T', sort='ascending'),
+        ).properties(
+        width=800,
+        height=300
+        ),  use_container_width=True
+        )
 
-    # Parameters
-    
-    ticker_pair = f"{crypto_name}-{currency_name}"
-    ticker = ticker_pair
-    start_date = "2020-01-01"
-    window_size = 60
-    batch_size = 32
-    epochs = 50
+        # Parameters
+        
+        ticker_pair = f"{crypto_name}-{currency_name}"
+        ticker = ticker_pair
+        start_date = "2020-01-01"
+        window_size = 60
+        batch_size = 32
+        epochs = 50
 
 
 
-    
-    # Fetch and preprocess data
-    print("Fetching and preprocessing data...")
-    data = fetch_data(ticker, start_date)
-    X, y, scaler = preprocess_data(data, window_size)
-    
-    # Convert to PyTorch tensors
-    X_tensor = torch.tensor(X, dtype=torch.float32)
-    y_tensor = torch.tensor(y, dtype=torch.float32).view(-1, 1)
-    
-    # Create DataLoader
-    print("Creating DataLoader...")
-    dataset = TensorDataset(X_tensor, y_tensor)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-    
-    # Build and train model
-    print("Building and training model...")
-    model = PricePredictor(X_tensor.shape[1])
-    criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
-    
-    train_model(model, dataloader, criterion, optimizer, epochs=epochs)
-    
-    # Predict the next price
-    st.info("Predicting the next price...")
-    next_price = predict_next_price(model, data, window_size, scaler)
-    st.success(f"Predicted next price of {crypto_name}-{currency_name}: {next_price}")
+        
+        # Fetch and preprocess data
+        print("Fetching and preprocessing data...")
+        data = fetch_data(ticker, start_date)
+        X, y, scaler = preprocess_data(data, window_size)
+        
+        # Convert to PyTorch tensors
+        X_tensor = torch.tensor(X, dtype=torch.float32)
+        y_tensor = torch.tensor(y, dtype=torch.float32).view(-1, 1)
+        
+        # Create DataLoader
+        print("Creating DataLoader...")
+        dataset = TensorDataset(X_tensor, y_tensor)
+        dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+        
+        # Build and train model
+        print("Building and training model...")
+        model = PricePredictor(X_tensor.shape[1])
+        criterion = nn.MSELoss()
+        optimizer = optim.Adam(model.parameters(), lr=0.001)
+        
+        train_model(model, dataloader, criterion, optimizer, epochs=epochs)
+        
+        # Predict the next price
+        st.info("Predicting the next price...")
+        next_price = predict_next_price(model, data, window_size, scaler)
+        st.success(f"Predicted next price of {crypto_name}-{currency_name}: {next_price}")
 
 
 
