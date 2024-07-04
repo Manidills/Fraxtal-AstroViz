@@ -107,6 +107,7 @@ def pred():
 
 
         data = get_near_data(start_date,end_date)
+        data = data['Close'].values.reshape(-1, 1)
         # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
         # st.write(pd.DataFrame(data))
         st.write(f"Ploting the graph between {crypto_name} and {currency_name}.")
