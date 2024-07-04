@@ -383,7 +383,7 @@ def near_app():
             time_series_forecast(df)
             covariance_correlations(df)
             stock_statistics(df)
-            beta_calculation(df)
+            #beta_calculation(df)
             linear_regression(df)
             # Anomaly Detection
             anomaly_detection(df)
