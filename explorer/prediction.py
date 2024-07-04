@@ -11,6 +11,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import datetime as dt
 import altair as alt
+import sys
 
 
 
@@ -99,9 +100,7 @@ def pred():
     currency_name = st.selectbox("Select Local Currency",("USD","EUR","INR","CAD","AUD","GBP"))
 
     if st.button("Visualize"):
-
-
-
+        sys.stderr.flush()
 
         data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end)
         # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
