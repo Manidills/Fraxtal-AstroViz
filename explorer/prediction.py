@@ -87,12 +87,16 @@ def serialize_to_onnx(model, input_size, onnx_file_path):
                       dynamic_axes={'input': {0: 'batch_size'}, 'output': {0: 'batch_size'}})
     print(f"✅ Model has been converted to ONNX and saved at {onnx_file_path} ")
 
+def get_near_data(start_date, end_date):
+    near = yf.Ticker("FXS-USD")
+    return near.history(start=start_date, end=end_date)
+
 # Main execution
 def pred():
 
 
-    start = dt.datetime(2020,1,1)
-    end = dt.datetime.now()
+    start_date = st.date_input("Start Date", value=pd.to_datetime('2023-01-01'))
+    end_date = st.date_input("End Date", value=pd.to_datetime('today'))
 
     st.write(""" ## Cryptocurrency Price Visualizer """)
 
@@ -101,7 +105,8 @@ def pred():
 
     if st.button("Visualize"):
 
-        data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end,progress="false")
+
+        data = get_near_data(start_date,end_date)
         # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
         # st.write(pd.DataFrame(data))
         st.write(f"Ploting the graph between {crypto_name} and {currency_name}.")
