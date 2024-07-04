@@ -320,7 +320,7 @@ def generate_input_prompt(anomaly_summary):
     # Add more to the prompt as needed
 
 def anomaly_detection(df):
-    st.subheader("Whales/Sharks Detection in NEAR-USD Trading Patterns")
+    st.subheader("Whales/Sharks Detection in FXS-USD Trading Patterns")
 
     data = df[['Close']].copy()
     isolation_forest = IsolationForest(n_estimators=100, contamination='auto', random_state=42)
@@ -331,7 +331,7 @@ def anomaly_detection(df):
     plt.figure(figsize=(10, 6))
     plt.plot(data.index, data['Close'], color='blue', label='Normal')
     plt.scatter(anomaly_data.index, anomaly_data['Close'], color='red', label='Whales/sharks')
-    plt.title("Whales/Sharks Detection in NEAR-USD Trading Patterns")
+    plt.title("Whales/Sharks Detection in FXS-USD Trading Patterns")
     plt.xlabel("Date")
     plt.ylabel("Close Price")
     plt.legend()

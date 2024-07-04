@@ -50,7 +50,7 @@ def wallet_con():
 
 if action == "Analytics":
     near_app()
-elif action == "prediction":
+elif action == "Prediction":
     pred()
 elif action == "FraxLend":
     lend()
