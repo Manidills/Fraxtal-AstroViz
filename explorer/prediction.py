@@ -107,7 +107,6 @@ def pred():
 
 
         data = get_near_data(start_date,end_date)
-        data = data['Close'].values.reshape(-1, 1)
         # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
         # st.write(pd.DataFrame(data))
         st.write(f"Ploting the graph between {crypto_name} and {currency_name}.")
@@ -142,7 +141,9 @@ def pred():
         
         # Fetch and preprocess data
         print("Fetching and preprocessing data...")
-        data = get_near_data(start_date,end_date)
+        #data = fetch_data(ticker, start_date)
+        data_1 = get_near_data(start_date,end_date)
+        data = data_1['Close'].values.reshape(-1, 1)
         X, y, scaler = preprocess_data(data, window_size)
         
         # Convert to PyTorch tensors
