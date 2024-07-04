@@ -88,6 +88,7 @@ def serialize_to_onnx(model, input_size, onnx_file_path):
     print(f"✅ Model has been converted to ONNX and saved at {onnx_file_path} ")
 
 # Main execution
+@st.cache_data(show_spinner = False)
 def pred():
 
 
