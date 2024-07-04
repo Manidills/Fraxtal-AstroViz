@@ -369,16 +369,13 @@ def anomaly_detection(df):
 # Main app function
 def near_app():
 
-    with st.form(key='my_form'):
         st.markdown("### Select an Option")
         option = st.radio(
             "Select Choice",
             ("Analysis", "Prediction"),
-            index=0,
+            index=0, horizontal=True
         )
-        submit_button = st.form_submit_button(label='Submit')
 
-    if submit_button:
 
 
         if option == "Analysis":
@@ -407,9 +404,6 @@ def near_app():
                     # st.markdown(f"<div style='padding: 10px; border-radius: 10px; background-color: #f0f4c3; margin-bottom: 10px;'>🤖 <strong>Investment predictions response:</strong><br>{prediction}</div>", unsafe_allow_html=True)
         elif option == "Prediction":
             pred()
-    else:
-        st.info("Please Submit the option to view data")
-    
 
 
 if __name__ == "__main__":
