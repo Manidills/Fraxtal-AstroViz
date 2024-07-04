@@ -102,7 +102,7 @@ def pred():
     if st.button("Visualize"):
         sys.stderr.flush()
 
-        data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end)
+        data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end,progress="false ")
         # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
         # st.write(pd.DataFrame(data))
         st.write(f"Ploting the graph between {crypto_name} and {currency_name}.")
