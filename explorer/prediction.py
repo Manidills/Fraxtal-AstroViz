@@ -100,7 +100,6 @@ def pred():
     currency_name = st.selectbox("Select Local Currency",("USD","EUR","INR","CAD","AUD","GBP"))
 
     if st.button("Visualize"):
-        sys.stderr.flush()
 
         data = yf.download(tickers=f"{crypto_name}-{currency_name}", start=start, end=end,progress="false ")
         # data = web.DataReader(f"{crypto_name}-{currency_name}", "yahoo")
