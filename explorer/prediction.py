@@ -141,7 +141,7 @@ def pred():
         
         # Fetch and preprocess data
         print("Fetching and preprocessing data...")
-        data = fetch_data(ticker, start_date)
+        data = get_near_data(start_date,end_date)
         X, y, scaler = preprocess_data(data, window_size)
         
         # Convert to PyTorch tensors
